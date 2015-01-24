@@ -46,7 +46,7 @@
 
   Dragster.prototype.advance = function() {
     // this should move the car across the screen 1px at a time
-    this.$el.style.left = parseInt(this.$el.style.left, 10) + 1 + "px";
+    this.$el.style.left = parseInt(this.$el.style.left, 10) + 40 + "px";
   };
 
   var g = new Game();
