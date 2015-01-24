@@ -1,0 +1,130 @@
+body {
+	background-image: url(http://static.giantbomb.com/uploads/original/8/82063/2435376-f-zero+02.jpg);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-position: fixed;
+}
+
+#engine {
+	position: absolute;
+}
+
+#engineButton {
+	position: absolute;
+	height: 100px;
+	width: 100px;
+	margin-left: 150px;
+	margin-top: 270px;
+}
+
+p {
+	display: inline-block;
+	position: relative;
+	top: 290px;
+	left: 175px;
+	color: white;
+}
+
+
+#falcon {
+	position: absolute;
+	height: 60px;
+	width: 60px;
+	margin-top: 10px;
+	z-index: 999;
+	display: inline-block;
+	margin-left: 150px;
+}
+
+#tree {
+	height: 350px;
+	width: 150px;
+	margin: 0 auto;
+	font-family: Arial;
+}
+
+.treeBox {
+	background-color: black;
+	height: 50px;
+	width: auto;
+	border: 2px solid grey;
+	text-align: center;
+}
+
+#prestage {
+	color: white;
+	text-align: center;
+}
+
+#stage {
+	color: white;
+	text-align: center;
+}
+
+.yellowLight {
+
+}
+
+.greenLight {
+	color: grey;
+	margin: 0 auto;
+}
+
+.redLight {
+	color: grey;
+	margin: 0 auto;
+}
+
+.lilCircles {
+	height: 20px;
+	width: 20px;
+	background-color: white;
+	display: inline-block;
+	border-radius: 20px;
+	margin-top: 5px;
+}
+
+.bigCircles {
+	height: 40px;
+	width: 40px;
+	background-color: white;
+	display: inline-block;
+	border-radius: 20px;
+	margin-top: 5px;
+}
+
+
+.track {
+	margin: 0 auto;
+	margin-top: 60px;
+	height: 150px;
+	width: 1400px;
+}
+
+#asphalt {
+	position: absolute;
+	height: 150px;
+	width: 1400px;
+	z-index: -1;
+}
+
+.strip {
+	position: relative;
+	height: 150px;
+	width: 20px;
+	background-color: #e3e853;
+	display: inline-block;
+	z-index: 1;
+}
+
+#stage {
+	left: 120px;
+}
+
+#start {
+	left: 230px;
+}
+
+#finish {
+	left: 1200px;
+}
