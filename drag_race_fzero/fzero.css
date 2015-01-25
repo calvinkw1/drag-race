@@ -33,7 +33,7 @@ p {
 	margin-top: 10px;
 	z-index: 999;
 	display: inline-block;
-	margin-left: 150px;
+	left: 0;
 }
 
 #tree {
@@ -93,24 +93,32 @@ p {
 	margin-top: 5px;
 }
 
+.container {
+	margin: 0 auto;
+	width: 90%;
+	height: 150px;
+
+}
 
 .track {
+	position: absolute;
 	margin: 0 auto;
 	margin-top: 60px;
 	height: 150px;
-	width: 1400px;
+	width: inherit;
+	left: 150px;
 }
 
 #asphalt {
 	position: absolute;
 	height: 150px;
-	width: 1400px;
+	width: inherit;
 	z-index: -1;
 }
 
 .strip {
-	position: relative;
-	height: 150px;
+	position: absolute;
+	height: inherit;
 	width: 20px;
 	background-color: #e3e853;
 	display: inline-block;
@@ -119,12 +127,15 @@ p {
 
 #stager {
 	left: 120px;
+	position: relative;
 }
 
 #start {
 	left: 230px;
+	position: relative;
 }
 
 #finish {
 	left: 1200px;
+	position: relative;
 }
