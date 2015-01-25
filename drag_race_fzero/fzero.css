@@ -33,7 +33,6 @@ p {
 	margin-top: 10px;
 	z-index: 999;
 	display: inline-block;
-	left: 0;
 }
 
 #tree {
@@ -127,15 +126,12 @@ p {
 
 #stager {
 	left: 120px;
-	position: relative;
 }
 
 #start {
 	left: 230px;
-	position: relative;
 }
 
 #finish {
-	left: 1200px;
-	position: relative;
+	right: 200px;
 }

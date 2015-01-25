@@ -8,6 +8,7 @@
 		    this.engineButton = new EngineButton();
 		    this.prestageLights = new PrestageLights();
 		    this.stageLights = new StageLights();
+		    this.redLights = new RedLights();
 
 		    this.attachListeners();
 		};
@@ -38,6 +39,11 @@
 			this.$el = document.getElementsByClassName("stageLights");
 			var stageArray = Array.prototype.slice.call(this.$el);
 			console.log(stageArray);
+		};
+
+		var RedLights = function() {
+			this.$el = document.getElementsByClassName("redLights");
+			var redArray = Array.prototype.slice.call(this.$el);
 		};
 
 		var Lines = function() {
@@ -72,13 +78,20 @@
 	    		}
 	      		if (engine.power === "on" && event.keyCode === 39) {
 	        		self.falcon.advance();
-	        		if (falcon.style.left >= "700px") {
+	        		if (falcon.style.left === parseInt("140px", 10) + "px") {
 		        		self.stageLights.yellowOn();
-		        }
+		        	}
+		        	if (falcon.style.left === parseInt("171px", 10) + "px") {
+		        		self.redLights.redOn();
+		        	}
 	      		}
 	      		if (engine.power === "on" && event.keyCode === 37) {
-	        	self.falcon.backup();
-	      		}
+		        	self.falcon.backup();
+		      		if (falcon.style.left === parseInt("170px", 10) + "px") {
+		        		self.redLights.redOff();
+		        		console.log(falcon.style.left);
+		        	}
+		      	}
 	      		
 	    	});
 		};
@@ -98,9 +111,24 @@
 			});
 		};
 
+		RedLights.prototype.redOn = function() {
+			var redArray = Array.prototype.slice.call(this.$el);
+			redArray.forEach(function(x) {
+				x.style.backgroundColor = "red";
+			});
+		};
+
+		RedLights.prototype.redOff = function() {
+			var redArray = Array.prototype.slice.call(this.$el);
+			redArray.forEach(function(x) {
+				x.style.backgroundColor = "";
+			});
+		};
+
 		Falcon.prototype.advance = function() {
     		// this should move the car across the screen 1px at a time
-    		this.$el.style.left = parseInt(this.$el.style.left, 10) + 10 + "px";
+    		this.$el.style.left = parseInt(this.$el.style.left, 10) + 1 + "px";
+
   		};
 
   		Falcon.prototype.backup = function() {
