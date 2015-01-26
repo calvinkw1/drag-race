@@ -79,6 +79,7 @@
 		        	if (falcon.style.left === parseInt("180px", 10) + "px" && greenLight === "off") {
 		        		self.redLights.redOn();
 		        		alert("No cheating Falcon! You're better than that!");
+		        		falcon.style.left = "0px";
 		        		self.treeCountStart.resetLights();
 		        	}
 	      		}
@@ -94,6 +95,8 @@
 	      		}
 	      		if (falcon.style.left === parseInt("1250px", 10) + "px") {
 	      			alert("Winner!"); // keeps alerting on any keypress.. why?
+	      			engine.power = "off";
+	      			falcon.style.left = "0px"; // moved falcon element back to left 0 to avoid staying on the winner alert coordinate.
 	      		}
 	    	});
 		};
@@ -105,10 +108,12 @@
 			});
 		};
 
+		var isStaged = false;
 		StageLights.prototype.yellowOn = function() {
 			var stageArray = Array.prototype.slice.call(this.$el);
 			stageArray.forEach(function(x) {
 				x.style.backgroundColor = "yellow";
+				isStaged = true;
 			});
 		};
 
@@ -136,21 +141,21 @@
 		var greenLight = "off";
 		TreeCountStart.prototype.startCountdown = function() {
 			var counter = 1;
-			function startCountdown() {   
-				if (counter <= 3 && faultLights === "off"){
+			function startCountdown() {
+				if (counter <= 3 && faultLights === "off" && isStaged){
             		console.log([counter]);
 		            document.getElementById("left"+[counter]).style.backgroundColor = "yellow";
 		            document.getElementById("right"+[counter]).style.backgroundColor = "yellow";    
 			        counter++;
-    			} else  if (counter <= 4 && faultLights === "off") {
+    			} else  if (counter <= 4 && faultLights === "off" && isStaged) {
 		            console.log([counter]);
-		            document.getElementById("left"+[counter]).style.backgroundColor = "green";
-		            document.getElementById("right"+[counter]).style.backgroundColor = "green";    
+		            document.getElementById("left"+[counter]).style.backgroundColor = "#00ffa7";
+		            document.getElementById("right"+[counter]).style.backgroundColor = "#00ffa7";    
 			        counter++;
 					greenLight = "on";
     			} else {
         			console.log("break");
-			        return stopCount();
+			        stopCount();
 				}
 			}
 			function  startTree(){
