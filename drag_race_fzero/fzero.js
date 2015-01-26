@@ -92,7 +92,7 @@
 		      			self.treeCountStart.startCountdown();
 		      			console.log("keypress registered, function activated");
 	      		}
-	      		if (falcon.style.left === parseInt("1300px", 10) + "px") {
+	      		if (falcon.style.left === parseInt("1250px", 10) + "px") {
 	      			alert("Winner!"); // keeps alerting on any keypress.. why?
 	      		}
 	    	});
