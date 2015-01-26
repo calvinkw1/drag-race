@@ -1,5 +1,4 @@
 (function() {
-
 		var Game = function() {
 			this.falcon = new Falcon();
 			this.tree = new Tree();
@@ -9,6 +8,7 @@
 		    this.prestageLights = new PrestageLights();
 		    this.stageLights = new StageLights();
 		    this.redLights = new RedLights();
+		    this.treeCountStart = new TreeCountStart();
 
 		    this.attachListeners();
 		};
@@ -38,32 +38,27 @@
 		var StageLights = function() {
 			this.$el = document.getElementsByClassName("stageLights");
 			var stageArray = Array.prototype.slice.call(this.$el);
-			console.log(stageArray);
 		};
 
 		var RedLights = function() {
 			this.$el = document.getElementsByClassName("redLights");
 			var redArray = Array.prototype.slice.call(this.$el);
+			faultLights = "off";
 		};
 
-		var Lines = function() {
-			var stagerLoc = document.getElementById("stager"),
-				startLoc = document.getElementById("start"),
-				finishLoc = document.getElementById("finish");
+		var TreeCountStart = function() {
+			// this.$el1 = document.getElementsByClassName("countdown1");
+			// this.$el2 = document.getElementsByClassName("countdown2");
+			// this.$el3 = document.getElementsByClassName("countdown3");
+			// this.$el4 = document.getElementsByClassName("go");
+			// var count1Array = Array.prototype.slice.call(this.$el1);
+			// var count2Array = Array.prototype.slice.call(this.$el2);
+			// var count3Array = Array.prototype.slice.call(this.$el3);
+			// var goArray = Array.prototype.slice.call(this.$el4);
 
-			stagerRect = stagerLoc.getBoundingClientRect();		// ClientRect {height: 150, width: 20, left: 252.5, bottom: 568, right: 272.5…}
-			startRect = startLoc.getBoundingClientRect();		// ClientRect {height: 150, width: 20, left: 386.5, bottom: 568, right: 406.5…}
-			finishRect = finishLoc.getBoundingClientRect();		// ClientRect {height: 150, width: 20, left: 1380.5, bottom: 568, right: 1400.5…}
-
-			console.log(stagerRect);
-			console.log(startRect);
-			console.log(finishRect);
+			this.$el = document.getElementsByClassName("bigCircles");
+			var circlesArray = Array.prototype.slice.call(this.$el);
 		};
-		
-		new Lines();
-		
-		 
-		 
 
 	  	Game.prototype.attachListeners = function() {
 	    	var self = this;
@@ -81,18 +76,25 @@
 	        		if (falcon.style.left === parseInt("140px", 10) + "px") {
 		        		self.stageLights.yellowOn();
 		        	}
-		        	if (falcon.style.left === parseInt("171px", 10) + "px") {
+		        	if (falcon.style.left === parseInt("180px", 10) + "px" && greenLight === "off") {
 		        		self.redLights.redOn();
+		        		alert("No cheating Falcon! You're better than that!");
+		        		self.treeCountStart.resetLights();
 		        	}
 	      		}
 	      		if (engine.power === "on" && event.keyCode === 37) {
 		        	self.falcon.backup();
 		      		if (falcon.style.left === parseInt("170px", 10) + "px") {
 		        		self.redLights.redOff();
-		        		console.log(falcon.style.left);
 		        	}
 		      	}
-	      		
+	      		if (event.keyCode === 32) {
+		      			self.treeCountStart.startCountdown();
+		      			console.log("keypress registered, function activated");
+	      		}
+	      		if (falcon.style.left === parseInt("1300px", 10) + "px") {
+	      			alert("Winner!"); // keeps alerting on any keypress.. why?
+	      		}
 	    	});
 		};
 
@@ -100,7 +102,6 @@
 			var prestageArray = Array.prototype.slice.call(this.$el);
 			prestageArray.forEach(function(x) {
 				x.style.backgroundColor = "yellow";
-				console.log(x);
 			});
 		};
 
@@ -114,26 +115,73 @@
 		RedLights.prototype.redOn = function() {
 			var redArray = Array.prototype.slice.call(this.$el);
 			redArray.forEach(function(x) {
-				x.style.backgroundColor = "red";
+				x.style.backgroundColor = "#ff0000";
+				faultLights = "on";
+				
 			});
+			console.log(faultLights);
 		};
 
+		var faultLights = "off";
 		RedLights.prototype.redOff = function() {
 			var redArray = Array.prototype.slice.call(this.$el);
 			redArray.forEach(function(x) {
 				x.style.backgroundColor = "";
+				// this.faultLights = "off";
+				
 			});
+			console.log(faultLights);
+		};
+
+		var greenLight = "off";
+		TreeCountStart.prototype.startCountdown = function() {
+			var counter = 1;
+			function startCountdown() {   
+				if (counter <= 3 && faultLights === "off"){
+            		console.log([counter]);
+		            document.getElementById("left"+[counter]).style.backgroundColor = "yellow";
+		            document.getElementById("right"+[counter]).style.backgroundColor = "yellow";    
+			        counter++;
+    			} else  if (counter <= 4 && faultLights === "off") {
+		            console.log([counter]);
+		            document.getElementById("left"+[counter]).style.backgroundColor = "green";
+		            document.getElementById("right"+[counter]).style.backgroundColor = "green";    
+			        counter++;
+					greenLight = "on";
+    			} else {
+        			console.log("break");
+			        return stopCount();
+				}
+			}
+			function  startTree(){
+			intervalID = setInterval(startCountdown, 1000);
+			}
+
+			function stopCount(){
+			    clearInterval(intervalID);
+			}
+
+			function resetLights() {
+				if (counter <= 4){
+            		console.log([counter]);
+		            document.getElementById("left"+[counter]).style.backgroundColor = "yellow";
+		            document.getElementById("right"+[counter]).style.backgroundColor = "yellow";    
+			        counter++;
+				}
+			}
+
+			startTree();
 		};
 
 		Falcon.prototype.advance = function() {
     		// this should move the car across the screen 1px at a time
-    		this.$el.style.left = parseInt(this.$el.style.left, 10) + 1 + "px";
+    		this.$el.style.left = parseInt(this.$el.style.left, 10) + 10 + "px";
 
   		};
 
   		Falcon.prototype.backup = function() {
     		// this should move the car across the screen 1px at a time
-    		this.$el.style.left = parseInt(this.$el.style.left, 10) - 1 + "px";
+    		this.$el.style.left = parseInt(this.$el.style.left, 10) - 10 + "px";
   		};
 
 		var g = new Game();

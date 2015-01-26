@@ -51,17 +51,13 @@ p {
 }
 
 #prestage {
-	color: white;
+	color: grey;
 	text-align: center;
 }
 
 #stage {
-	color: white;
+	color: grey;
 	text-align: center;
-}
-
-.yellowLight {
-
 }
 
 .greenLight {
@@ -77,7 +73,7 @@ p {
 .lilCircles {
 	height: 20px;
 	width: 20px;
-	background-color: white;
+	background-color: grey;
 	display: inline-block;
 	border-radius: 20px;
 	margin-top: 5px;
@@ -86,7 +82,7 @@ p {
 .bigCircles {
 	height: 40px;
 	width: 40px;
-	background-color: white;
+	background-color: grey;
 	display: inline-block;
 	border-radius: 20px;
 	margin-top: 5px;
